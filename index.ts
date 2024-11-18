@@ -156,6 +156,9 @@ app.use(limiter);
 // --- thirdweb webhook
 app.post("/webhook", thirdwebWebHookHandler);
 app.post("/failedTx-webhook", failedTxWebHookHandler);
+app.get('/healthcheck', (req, res) => {
+    res.status(200).json({ status: 'OK' });
+});
 
 app.use(apiKeyGateAndTracking);
 
@@ -288,6 +291,8 @@ app.get("/generate-authentication-options", (req, res) => {
 
 	res.send(options);
 });
+
+
 
 // --- Store condition
 app.post("/store-condition", storeConditionHandler);

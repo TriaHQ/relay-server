@@ -705,9 +705,9 @@ export async function getPKPsForAuthMethod({
 		);
 	}
 
+	try {
 	const pkpPermissions = await getPermissionsContract();
-	if (pkpPermissions) {
-		try {
+		if (pkpPermissions) {
 			const tokenIds = await pkpPermissions.getTokenIdsForAuthMethod(
 				authMethodType,
 				idForAuthMethod,
@@ -725,12 +725,12 @@ export async function getPKPsForAuthMethod({
 				}
 			}
 			return pkps;
-		} catch (err) {
-			console.log("Unable to get PKPs for auth method", err);
-			throw new Error("Unable to get PKPs for auth method");
+		} else {
+			throw new Error("Unable to connect to PKP Permissions contract");
 		}
-	} else {
-		throw new Error("Unable to connect to PKP Permissions contract");
+	} catch (err) {
+		console.log("Unable to get PKPs for auth method", err);
+		throw new Error("Unable to get PKPs for auth method");
 	}
 }
 
