@@ -77,6 +77,7 @@ import { getTxStatusByQueueId } from "./routes/thirdweb/transaction";
 import { RoundRobin } from './utils/thirdweb/roundRobin';
 import { TempRoundRobin } from './utils/tmp/testRoundRobin';
 import { backendWallets } from './utils/thirdweb/constants';
+import { setUserContext } from './middleware/sentry';
 
 
 
@@ -298,13 +299,13 @@ app.get("/generate-authentication-options", (req, res) => {
 app.post("/store-condition", storeConditionHandler);
 
 // --- Mint PKP for authorized account
-app.post("/mint-next-and-add-auth-methods", mintNextAndAddAuthMethodsHandler);
+app.post("/mint-next-and-add-auth-methods", setUserContext, mintNextAndAddAuthMethodsHandler);
 
 // -- (V2) Mint PKP for authorized account (using ThirdWeb)
-app.post("/api/v2/mint-next-and-add-auth-methods", mintNextAndAddAuthMethodsHandler);
+app.post("/api/v2/mint-next-and-add-auth-methods", setUserContext, mintNextAndAddAuthMethodsHandler);
 
 // --- Fetch PKPs tied to authorized account
-app.post("/fetch-pkps-by-auth-method", fetchPKPsHandler);
+app.post("/fetch-pkps-by-auth-method", setUserContext, fetchPKPsHandler);
 
 // --- Poll minting progress
 app.get("/auth/status/:requestId", getAuthStatusHandler);
