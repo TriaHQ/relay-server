@@ -44,5 +44,5 @@ jobs:
       
       - name: Deploy K8S
         run: |
-          aws eks update-kubeconfig --region ap-south-1 --name tf-tria-dev
+          aws eks update-kubeconfig --region ${{ secrets.AWS_REGION_DEV }} --name tf-tria-dev
           make deploy-k8s-dev
