@@ -1,10 +1,5 @@
 name: Manual-Deploy-PREPROD
 
-on:
-  push:
-    branches:
-      - thirdweb-preprod
-
 jobs:
   build:
     runs-on: ubuntu-latest

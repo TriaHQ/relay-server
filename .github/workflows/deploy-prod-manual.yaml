@@ -1,10 +1,5 @@
 name: Manual-Deploy-PROD
 
-on:
-  push:
-    branches:
-      - thirdweb-main
-
 jobs:
   build:
     runs-on: ubuntu-latest

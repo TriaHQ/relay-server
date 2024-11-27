@@ -1,10 +1,5 @@
 name: Manual-Deploy-Dev
 
-on:
-  push:
-    branches:
-      - thirdweb-dev
-
 jobs:
   build:
     runs-on: ubuntu-latest
