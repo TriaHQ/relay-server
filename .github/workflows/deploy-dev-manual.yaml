@@ -1,4 +1,4 @@
-name: Auto-Build-Deploy-Dev
+name: Manual-Deploy-Dev
 
 on:
   push:
@@ -28,19 +28,7 @@ jobs:
       
        # Install necessary dependencies if needed (like gcc, make, etc.)
       - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y build-essential  
-
-      - name: Authenticate with npm
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-      
-      - name: Authenticate with sentry
-        run: echo "[auth]\ntoken=${{ secrets.SENTRY_TOKEN }}" > .sentryclirc
-
-      - name: Build Docker Image
-        run: make build
-      
-      - name: Push Docker Image
-        run: make release
+        run: sudo apt-get update && sudo apt-get install -y build-essential
       
       - name: Deploy K8S
         run: |
